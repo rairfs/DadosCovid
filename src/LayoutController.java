@@ -35,6 +35,9 @@ public class LayoutController {
     private MenuItem fxOpen;
 
     @FXML
+    private MenuItem fxSnapShot;
+
+    @FXML
     void closeFile(ActionEvent event) {
 
     }

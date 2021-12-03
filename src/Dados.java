@@ -60,7 +60,32 @@ public class Dados implements Comparable {
 
     @Override
     public int compareTo(Object o) {
-        // TODO Auto-generated method stub
-        return 0;
+        try{
+            Dados outro = (Dados) o;
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        if (data.after(o)){
+            return 1;
+        }
+        else if (data.before(o)){
+            return -1;
+        }
+        else {
+            return 0;
+        }
+
+    }
+
+    public boolean equals(Object obj){
+        if (!(obj instanceof Dados)){
+            return false;
+        }
+        Dados outro = (Dados) obj;
+        if (data.MONTH == outro.data.MONTH){
+            return true;
+        }
+        return false;
     }
 }

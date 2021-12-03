@@ -19,6 +19,7 @@
           <Menu mnemonicParsing="false" text="Arquivo">
             <items>
                   <MenuItem fx:id="fxOpen" mnemonicParsing="false" onAction="#openFile" text="Abrir" />
+                  <MenuItem fx:id="fxSnapShot" mnemonicParsing="false" text="Tirar snapshot" />
               <MenuItem fx:id="fxClose" mnemonicParsing="false" onAction="#closeFile" text="Fechar" />
             </items>
           </Menu>
