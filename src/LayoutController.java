@@ -4,9 +4,11 @@ import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Scanner;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.stage.FileChooser;
@@ -38,8 +40,11 @@ public class LayoutController {
     private MenuItem fxSnapShot;
 
     @FXML
-    void closeFile(ActionEvent event) {
+    private Label fxWarning;
 
+    @FXML
+    void closeFile(ActionEvent event) {
+        System.exit(0);
     }
 
     @FXML
@@ -87,5 +92,5 @@ public class LayoutController {
         }
         contador = 0;
     }
-
 }
+

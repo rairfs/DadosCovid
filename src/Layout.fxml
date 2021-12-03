@@ -31,7 +31,7 @@
         </menus>
       </MenuBar>
       <ListView fx:id="fxListView" layoutY="25.0" prefHeight="575.0" prefWidth="220.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="25.0" />
-      <HBox alignment="CENTER" layoutX="161.0" layoutY="32.0" prefHeight="25.0" prefWidth="429.0" spacing="5.0" AnchorPane.leftAnchor="160.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="30.0">
+      <HBox alignment="CENTER" layoutX="230.0" layoutY="32.0" prefHeight="25.0" prefWidth="560.0" spacing="5.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="30.0">
          <children>
             <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" text="Opções de filtro" />
             <DatePicker fx:id="fxStartDate" prefHeight="25.0" prefWidth="129.0" />
@@ -46,5 +46,6 @@
           <NumberAxis side="LEFT" />
         </yAxis>
       </BarChart>
+      <Label fx:id="fxWarning" layoutX="486.0" layoutY="57.0" text="Selecione uma data válida" textFill="#ee0404" visible="false" AnchorPane.leftAnchor="486.0" AnchorPane.rightAnchor="176.0" />
    </children>
 </AnchorPane>
