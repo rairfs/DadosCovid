@@ -3,6 +3,7 @@
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
@@ -30,12 +31,12 @@
           </Menu>
         </menus>
       </MenuBar>
-      <ListView fx:id="fxListView" layoutY="25.0" prefHeight="575.0" prefWidth="220.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="25.0" />
+      <ListView fx:id="fxListView" layoutY="22.0" onMouseClicked="#atualizarTabela" prefHeight="578.0" prefWidth="220.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="25.0" />
       <HBox alignment="CENTER" layoutX="230.0" layoutY="32.0" prefHeight="25.0" prefWidth="560.0" spacing="5.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="30.0">
          <children>
-            <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" text="Opções de filtro" />
-            <DatePicker fx:id="fxStartDate" prefHeight="25.0" prefWidth="129.0" />
-            <DatePicker fx:id="fxEndDate" prefHeight="25.0" prefWidth="130.0" />
+            <ComboBox fx:id="fxComboBox" onAction="#comboBoxUpdate" prefWidth="150.0" promptText="Selecione um filtro" />
+            <DatePicker fx:id="fxStartDate" prefHeight="25.0" prefWidth="129.0" promptText="Selecione uma data" visible="false" />
+            <DatePicker fx:id="fxEndDate" prefHeight="25.0" prefWidth="130.0" promptText="Selecione uma data" visible="false" />
          </children>
       </HBox>
       <BarChart fx:id="fxHistogram" layoutX="149.0" layoutY="72.0" prefHeight="328.0" prefWidth="451.0" title="Selecione um dado" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">

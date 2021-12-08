@@ -7,10 +7,12 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 
 public class LayoutController {
@@ -20,6 +22,9 @@ public class LayoutController {
     Scanner leitor;
     @FXML
     private MenuItem fxClose;
+
+    @FXML
+    private ComboBox<String> fxComboBox;
 
     @FXML
     private DatePicker fxStartDate;
@@ -49,6 +54,7 @@ public class LayoutController {
 
     @FXML
     void openFile(ActionEvent event) throws FileNotFoundException, ParseException {
+        this.fxComboBox.getItems().add("Data");
         File f = fileChooser.showOpenDialog(null);
         leitor = new Scanner(f);
         fxListView.getItems().clear();
@@ -92,5 +98,17 @@ public class LayoutController {
         }
         contador = 0;
     }
+
+    @FXML
+    void comboBoxUpdate(ActionEvent event) {
+        this.fxStartDate.setVisible(true);
+        this.fxEndDate.setVisible(true);
+    }
+    
+    @FXML
+    void atualizarTabela(MouseEvent event) {
+        this.fxHistogram.setTitle(this.fxListView.getSelectionModel().getSelectedItem());
+    }
+
 }
 
