@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 
 import java.util.Calendar;
 
-public class Dados{
+public class Dados implements Comparable{
     private DateFormat dtFormat = new SimpleDateFormat("dd/MM/yyyy");
     public Calendar data = Calendar.getInstance();
     public Integer testesRealizados;
@@ -56,6 +56,35 @@ public class Dados{
 
     public Dados(){
 
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        if (!(o instanceof Dados)){
+            return 0;
+        }
+        Dados outro = (Dados) o;
+        if (data.after(outro.data)){
+            return 1;
+        }
+        else if (data.before(outro.data)){
+            return -1;
+        }
+        else {
+            return 0;
+        }
+
+    }
+
+    public boolean equals(Object obj){
+        if (!(obj instanceof Dados)){
+            return false;
+        }
+        Dados outro = (Dados) obj;
+        if (data.MONTH == outro.data.MONTH){
+            return true;
+        }
+        return false;
     }
 
 }

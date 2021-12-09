@@ -4,6 +4,7 @@ public class Organizador {
 
     public static ArrayList<Dados> agrupar(ArrayList<Dados> itens, Integer mes, Integer inicio, Integer fim){
         ArrayList<Dados> organizados = new ArrayList<Dados>();
+        // if Não funcionando, verificar!
         for (Dados i : itens) {
             if (i.data.MONTH > inicio && i.data.MONTH < fim && i.data.MONTH == mes){
                 organizados.add(i);

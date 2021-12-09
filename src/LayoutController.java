@@ -3,6 +3,7 @@ import java.io.FileNotFoundException;
 import java.text.ParseException;
 import java.time.Month;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Scanner;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -118,6 +119,7 @@ public class LayoutController {
             }
 
         }
+        Collections.sort(listaDados);
         contador = 0;
 
     }
