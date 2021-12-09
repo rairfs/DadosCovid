@@ -1,12 +1,14 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.List;
 public class Organizador {
 
-    public static ArrayList<Dados> agrupar(ArrayList<Dados> itens, Integer mes, Integer inicio, Integer fim){
+    public static ArrayList<Dados> agrupar(ArrayList<Dados> itens, LocalDate inicio, LocalDate fim){
         ArrayList<Dados> organizados = new ArrayList<Dados>();
         // if Não funcionando, verificar!
+
         for (Dados i : itens) {
-            if (i.data.MONTH > inicio && i.data.MONTH < fim && i.data.MONTH == mes){
+            if (i.getData().isAfter(inicio) && i.getData().isBefore(fim)){
                 organizados.add(i);
             }
         }

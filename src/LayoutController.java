@@ -1,10 +1,13 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.text.ParseException;
-import java.time.Month;
-import java.util.Calendar;
+import java.time.LocalDate;
 import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
@@ -39,7 +42,7 @@ public class LayoutController {
     private DatePicker fxEndDate;
 
     @FXML
-    private BarChart<Calendar, Integer> fxHistogram;
+    private BarChart<LocalDate, Integer> fxHistogram;
 
     @FXML
     private CategoryAxis fxMesesBarras;
@@ -59,9 +62,8 @@ public class LayoutController {
     @FXML
     private Label fxWarning;
 
-    Integer inicio;
-    Integer fim;
-    Integer mesAtual;
+    LocalDate inicio;
+    LocalDate fim;
 
     @FXML
     void closeFile(ActionEvent event) {
@@ -119,7 +121,6 @@ public class LayoutController {
             }
 
         }
-        Collections.sort(listaDados);
         contador = 0;
 
     }
@@ -132,374 +133,374 @@ public class LayoutController {
     
     @FXML
     void atualizarTabela(MouseEvent event) {
-        inicio = this.fxStartDate.getValue().getMonthValue();
-        fim = this.fxEndDate.getValue().getMonthValue();
-        mesAtual = this.fxStartDate.getValue().getMonthValue();
-        Integer soma = 0;
-        ArrayList<Dados> organizados;
+        inicio = this.fxStartDate.getValue();
+        fim = this.fxEndDate.getValue();
+        ArrayList<Dados> organizados = Organizador.agrupar(listaDados, inicio, fim);;
         XYChart.Series set1 = new XYChart.Series<>();
         this.fxHistogram.setTitle(this.fxListView.getSelectionModel().getSelectedItem());
         switch (this.fxListView.getSelectionModel().getSelectedItem().toString()) {
             case "TESTES REALIZADOS":
-                organizados = Organizador.agrupar(listaDados, mesAtual, inicio, fim);
-                for (int i = 0; i < fim - inicio; i++){
-                    for (Dados d : organizados) {
-                        soma += d.testesRealizados;
-                    }
-                    set1.getData().add(new XYChart.Data(Organizador.nomeMes(mesAtual), soma));
-                    if (mesAtual == 12){
-                        mesAtual = 1;
-                    }
-                    else {
-                        mesAtual++;
-                    }
-                    fxHistogram.getData().add(set1);
-                    set1.getData().clear();
-                    soma = 0;
-                }
+                Map<Integer, Integer> collect = organizados.stream().collect(
+                    Collectors.groupingBy(Dados::getMesInt, Collectors.summingInt((Dados d) -> d.getTestesRealizados())));
+                
+                // for (int i = 0; i < fim - inicio; i++){
+                //     for (Dados d : organizados) {
+                //         soma += d.testesRealizados;
+                //     }
+                //     set1.getData().add(new XYChart.Data(Organizador.nomeMes(mesAtual), soma));
+                //     if (mesAtual == 12){
+                //         mesAtual = 1;
+                //     }
+                //     else {
+                //         mesAtual++;
+                //     }
+                //     fxHistogram.getData().add(set1);
+                //     set1.getData().clear();
+                //     soma = 0;
+                // }
                 break;
             case "TESTES NEGATIVADOS":
-                organizados = Organizador.agrupar(listaDados, mesAtual, inicio, fim);
-                for (int i = 0; i < fim - inicio; i++){
-                    for (Dados d : organizados) {
-                        soma += d.testesNegativados;
-                    }
-                    set1.getData().add(new XYChart.Data(Organizador.nomeMes(mesAtual), soma));
-                    if (mesAtual == 12){
-                        mesAtual = 1;
-                    }
-                    else {
-                        mesAtual++;
-                    }
-                    fxHistogram.getData().add(set1);
-                    set1.getData().clear();
-                }
-                soma = 0;
+                organizados = Organizador.agrupar(listaDados, inicio, fim);
+                // for (int i = 0; i < fim - inicio; i++){
+                //     for (Dados d : organizados) {
+                //         soma += d.testesNegativados;
+                //     }
+                //     set1.getData().add(new XYChart.Data(Organizador.nomeMes(mesAtual), soma));
+                //     if (mesAtual == 12){
+                //         mesAtual = 1;
+                //     }
+                //     else {
+                //         mesAtual++;
+                //     }
+                //     fxHistogram.getData().add(set1);
+                //     set1.getData().clear();
+                // }
+                // soma = 0;
                 break;
             case "TESTES CONFIRMADOS":
-                organizados = Organizador.agrupar(listaDados, mesAtual, inicio, fim);
-                for (int i = 0; i < fim - inicio; i++){
-                    for (Dados d : organizados) {
-                        soma += d.testesNegativados;
-                    }
-                    set1.getData().add(new XYChart.Data(Organizador.nomeMes(mesAtual), soma));
-                    if (mesAtual == 12){
-                        mesAtual = 1;
-                    }
-                    else {
-                        mesAtual++;
-                    }
-                    fxHistogram.getData().add(set1);
-                    set1.getData().clear();
-                }
-                soma = 0;
+                organizados = Organizador.agrupar(listaDados, inicio, fim);
+                // for (int i = 0; i < fim - inicio; i++){
+                //     for (Dados d : organizados) {
+                //         soma += d.testesNegativados;
+                //     }
+                //     set1.getData().add(new XYChart.Data(Organizador.nomeMes(mesAtual), soma));
+                //     if (mesAtual == 12){
+                //         mesAtual = 1;
+                //     }
+                //     else {
+                //         mesAtual++;
+                //     }
+                //     fxHistogram.getData().add(set1);
+                //     set1.getData().clear();
+                // }
+                // soma = 0;
                 break;
             case "Nº DE CASOS POR DIA":
-                organizados = Organizador.agrupar(listaDados, mesAtual, inicio, fim);
-                for (int i = 0; i < fim - inicio; i++){
-                    for (Dados d : organizados) {
-                        soma += d.casosDia;
-                    }
-                    set1.getData().add(new XYChart.Data(Organizador.nomeMes(mesAtual), soma));
-                    if (mesAtual == 12){
-                        mesAtual = 1;
-                    }
-                    else {
-                        mesAtual++;
-                    }
-                    fxHistogram.getData().add(set1);
-                    set1.getData().clear();
-                }
-                soma = 0;
+                // organizados = Organizador.agrupar(listaDados, inicio, fim);
+                // for (int i = 0; i < fim - inicio; i++){
+                //     for (Dados d : organizados) {
+                //         soma += d.casosDia;
+                //     }
+                //     set1.getData().add(new XYChart.Data(Organizador.nomeMes(mesAtual), soma));
+                //     if (mesAtual == 12){
+                //         mesAtual = 1;
+                //     }
+                //     else {
+                //         mesAtual++;
+                //     }
+                //     fxHistogram.getData().add(set1);
+                //     set1.getData().clear();
+                // }
+                // soma = 0;
                 break;
             case "MASCULINO":
-                organizados = Organizador.agrupar(listaDados, mesAtual, inicio, fim);
-                for (int i = 0; i < fim - inicio; i++){
-                    for (Dados d : organizados) {
-                        soma += d.masculino;
-                    }
-                    set1.getData().add(new XYChart.Data(Organizador.nomeMes(mesAtual), soma));
-                    if (mesAtual == 12){
-                        mesAtual = 1;
-                    }
-                    else {
-                        mesAtual++;
-                    }
-                    fxHistogram.getData().add(set1);
-                    set1.getData().clear();
-                }
-                soma = 0;
+                // organizados = Organizador.agrupar(listaDados, inicio, fim);
+                // for (int i = 0; i < fim - inicio; i++){
+                //     for (Dados d : organizados) {
+                //         soma += d.masculino;
+                //     }
+                //     set1.getData().add(new XYChart.Data(Organizador.nomeMes(mesAtual), soma));
+                //     if (mesAtual == 12){
+                //         mesAtual = 1;
+                //     }
+                //     else {
+                //         mesAtual++;
+                //     }
+                //     fxHistogram.getData().add(set1);
+                //     set1.getData().clear();
+                // }
+                // soma = 0;
                 break;
             case "FEMININO":
-                organizados = Organizador.agrupar(listaDados, mesAtual, inicio, fim);
-                for (int i = 0; i < fim - inicio; i++){
-                    for (Dados d : organizados) {
-                        soma += d.feminino;
-                    }
-                    set1.getData().add(new XYChart.Data(Organizador.nomeMes(mesAtual), soma));
-                    if (mesAtual == 12){
-                        mesAtual = 1;
-                    }
-                    else {
-                        mesAtual++;
-                    }
-                    fxHistogram.getData().add(set1);
-                    set1.getData().clear();
-                }
-                soma = 0;
+                // organizados = Organizador.agrupar(listaDados, inicio, fim);
+                // for (int i = 0; i < fim - inicio; i++){
+                //     for (Dados d : organizados) {
+                //         soma += d.feminino;
+                //     }
+                //     set1.getData().add(new XYChart.Data(Organizador.nomeMes(mesAtual), soma));
+                //     if (mesAtual == 12){
+                //         mesAtual = 1;
+                //     }
+                //     else {
+                //         mesAtual++;
+                //     }
+                //     fxHistogram.getData().add(set1);
+                //     set1.getData().clear();
+                // }
+                // soma = 0;
                 break;
             case "ÓBITOS":
-                organizados = Organizador.agrupar(listaDados, mesAtual, inicio, fim);
-                for (int i = 0; i < fim - inicio; i++){
-                    for (Dados d : organizados) {
-                        soma += d.obitos;
-                    }
-                    set1.getData().add(new XYChart.Data(Organizador.nomeMes(mesAtual), soma));
-                    if (mesAtual == 12){
-                        mesAtual = 1;
-                    }
-                    else {
-                        mesAtual++;
-                    }
-                    fxHistogram.getData().add(set1);
-                    set1.getData().clear();
-                }
-                soma = 0;
+                // organizados = Organizador.agrupar(listaDados, inicio, fim);
+                // for (int i = 0; i < fim - inicio; i++){
+                //     for (Dados d : organizados) {
+                //         soma += d.obitos;
+                //     }
+                //     set1.getData().add(new XYChart.Data(Organizador.nomeMes(mesAtual), soma));
+                //     if (mesAtual == 12){
+                //         mesAtual = 1;
+                //     }
+                //     else {
+                //         mesAtual++;
+                //     }
+                //     fxHistogram.getData().add(set1);
+                //     set1.getData().clear();
+                // }
+                // soma = 0;
                 break;
             case "ISOLAMENTO DOMICILIAR":
-                organizados = Organizador.agrupar(listaDados, mesAtual, inicio, fim);
-                for (int i = 0; i < fim - inicio; i++){
-                    for (Dados d : organizados) {
-                        soma += d.isolamentoDomiciliar;
-                    }
-                    set1.getData().add(new XYChart.Data(Organizador.nomeMes(mesAtual), soma));
-                    if (mesAtual == 12){
-                        mesAtual = 1;
-                    }
-                    else {
-                        mesAtual++;
-                    }
-                    fxHistogram.getData().add(set1);
-                    set1.getData().clear();
-                }
-                soma = 0;
+                // organizados = Organizador.agrupar(listaDados, inicio, fim);
+                // for (int i = 0; i < fim - inicio; i++){
+                //     for (Dados d : organizados) {
+                //         soma += d.isolamentoDomiciliar;
+                //     }
+                //     set1.getData().add(new XYChart.Data(Organizador.nomeMes(mesAtual), soma));
+                //     if (mesAtual == 12){
+                //         mesAtual = 1;
+                //     }
+                //     else {
+                //         mesAtual++;
+                //     }
+                //     fxHistogram.getData().add(set1);
+                //     set1.getData().clear();
+                // }
+                // soma = 0;
                 break;
             case "ALTA ISOLAMENTO DOMICILIAR":
-                organizados = Organizador.agrupar(listaDados, mesAtual, inicio, fim);
-                for (int i = 0; i < fim - inicio; i++){
-                    for (Dados d : organizados) {
-                        soma += d.altaIsolamentoDomiciliar;
-                    }
-                    set1.getData().add(new XYChart.Data(Organizador.nomeMes(mesAtual), soma));
-                    if (mesAtual == 12){
-                        mesAtual = 1;
-                    }
-                    else {
-                        mesAtual++;
-                    }
-                    fxHistogram.getData().add(set1);
-                    set1.getData().clear();
-                }
-                soma = 0;
+                // organizados = Organizador.agrupar(listaDados, inicio, fim);
+                // for (int i = 0; i < fim - inicio; i++){
+                //     for (Dados d : organizados) {
+                //         soma += d.altaIsolamentoDomiciliar;
+                //     }
+                //     set1.getData().add(new XYChart.Data(Organizador.nomeMes(mesAtual), soma));
+                //     if (mesAtual == 12){
+                //         mesAtual = 1;
+                //     }
+                //     else {
+                //         mesAtual++;
+                //     }
+                //     fxHistogram.getData().add(set1);
+                //     set1.getData().clear();
+                // }
+                // soma = 0;
                 break;
             case "Nº DE LEITOS UTI PÚBLICO E PRIVADO":
-                organizados = Organizador.agrupar(listaDados, mesAtual, inicio, fim);
-                for (int i = 0; i < fim - inicio; i++){
-                    for (Dados d : organizados) {
-                        soma += d.leitosUTIPublicoPrivado;
-                    }
-                    set1.getData().add(new XYChart.Data(Organizador.nomeMes(mesAtual), soma));
-                    if (mesAtual == 12){
-                        mesAtual = 1;
-                    }
-                    else {
-                        mesAtual++;
-                    }
-                    fxHistogram.getData().add(set1);
-                    set1.getData().clear();
-                }
-                soma = 0;
+                // organizados = Organizador.agrupar(listaDados, inicio, fim);
+                // for (int i = 0; i < fim - inicio; i++){
+                //     for (Dados d : organizados) {
+                //         soma += d.leitosUTIPublicoPrivado;
+                //     }
+                //     set1.getData().add(new XYChart.Data(Organizador.nomeMes(mesAtual), soma));
+                //     if (mesAtual == 12){
+                //         mesAtual = 1;
+                //     }
+                //     else {
+                //         mesAtual++;
+                //     }
+                //     fxHistogram.getData().add(set1);
+                //     set1.getData().clear();
+                // }
+                // soma = 0;
                 break;
             case "Nº DE LEITOS DE UTI PÚBLICO":
-                organizados = Organizador.agrupar(listaDados, mesAtual, inicio, fim);
-                for (int i = 0; i < fim - inicio; i++){
-                    for (Dados d : organizados) {
-                        soma += d.leitosUTIPublico;
-                    }
-                    set1.getData().add(new XYChart.Data(Organizador.nomeMes(mesAtual), soma));
-                    if (mesAtual == 12){
-                        mesAtual = 1;
-                    }
-                    else {
-                        mesAtual++;
-                    }
-                    fxHistogram.getData().add(set1);
-                    set1.getData().clear();
-                }
-                soma = 0;
+                // organizados = Organizador.agrupar(listaDados, inicio, fim);
+                // for (int i = 0; i < fim - inicio; i++){
+                //     for (Dados d : organizados) {
+                //         soma += d.leitosUTIPublico;
+                //     }
+                //     set1.getData().add(new XYChart.Data(Organizador.nomeMes(mesAtual), soma));
+                //     if (mesAtual == 12){
+                //         mesAtual = 1;
+                //     }
+                //     else {
+                //         mesAtual++;
+                //     }
+                //     fxHistogram.getData().add(set1);
+                //     set1.getData().clear();
+                // }
+                // soma = 0;
                 break;
             case "Nº DE LEITOS DE UTI PRIVADO":
-                organizados = Organizador.agrupar(listaDados, mesAtual, inicio, fim);
-                for (int i = 0; i < fim - inicio; i++){
-                    for (Dados d : organizados) {
-                        soma += d.leitosUTIPrivado;
-                    }
-                    set1.getData().add(new XYChart.Data(Organizador.nomeMes(mesAtual), soma));
-                    if (mesAtual == 12){
-                        mesAtual = 1;
-                    }
-                    else {
-                        mesAtual++;
-                    }
-                    fxHistogram.getData().add(set1);
-                    set1.getData().clear();
-                }
-                soma = 0;
+                // organizados = Organizador.agrupar(listaDados, inicio, fim);
+                // for (int i = 0; i < fim - inicio; i++){
+                //     for (Dados d : organizados) {
+                //         soma += d.leitosUTIPrivado;
+                //     }
+                //     set1.getData().add(new XYChart.Data(Organizador.nomeMes(mesAtual), soma));
+                //     if (mesAtual == 12){
+                //         mesAtual = 1;
+                //     }
+                //     else {
+                //         mesAtual++;
+                //     }
+                //     fxHistogram.getData().add(set1);
+                //     set1.getData().clear();
+                // }
+                // soma = 0;
                 break;
             case "Nº DE LEITOS  ENFERMARIA  PÚBLICO E PRIVADO":
-                organizados = Organizador.agrupar(listaDados, mesAtual, inicio, fim);
-                for (int i = 0; i < fim - inicio; i++){
-                    for (Dados d : organizados) {
-                        soma += d.leitosEnfermariaPublicoPrivado;
+                // organizados = Organizador.agrupar(listaDados, inicio, fim);
+                // for (int i = 0; i < fim - inicio; i++){
+                //     for (Dados d : organizados) {
+                //         soma += d.leitosEnfermariaPublicoPrivado;
 
-                    }
-                    set1.getData().add(new XYChart.Data(Organizador.nomeMes(mesAtual), soma));
-                    if (mesAtual == 12){
-                        mesAtual = 1;
-                    }
-                    else {
-                        mesAtual++;
-                    }
-                    fxHistogram.getData().add(set1);
-                    set1.getData().clear();
-                }
-                soma = 0;
+                //     }
+                //     set1.getData().add(new XYChart.Data(Organizador.nomeMes(mesAtual), soma));
+                //     if (mesAtual == 12){
+                //         mesAtual = 1;
+                //     }
+                //     else {
+                //         mesAtual++;
+                //     }
+                //     fxHistogram.getData().add(set1);
+                //     set1.getData().clear();
+                // }
+                // soma = 0;
                 break;
             case "Nº DE LEITOS DE ENFERMARIA PÚBLICO":
-                organizados = Organizador.agrupar(listaDados, mesAtual, inicio, fim);
-                for (int i = 0; i < fim - inicio; i++){
-                    for (Dados d : organizados) {
-                        soma += d.leitosEnfermariaPublico;
-                    }
-                    set1.getData().add(new XYChart.Data(Organizador.nomeMes(mesAtual), soma));
-                    if (mesAtual == 12){
-                        mesAtual = 1;
-                    }
-                    else {
-                        mesAtual++;
-                    }
-                    fxHistogram.getData().add(set1);
-                    set1.getData().clear();
-                }
-                soma = 0;
+                // organizados = Organizador.agrupar(listaDados, inicio, fim);
+                // for (int i = 0; i < fim - inicio; i++){
+                //     for (Dados d : organizados) {
+                //         soma += d.leitosEnfermariaPublico;
+                //     }
+                //     set1.getData().add(new XYChart.Data(Organizador.nomeMes(mesAtual), soma));
+                //     if (mesAtual == 12){
+                //         mesAtual = 1;
+                //     }
+                //     else {
+                //         mesAtual++;
+                //     }
+                //     fxHistogram.getData().add(set1);
+                //     set1.getData().clear();
+                // }
+                // soma = 0;
                 break;
             case "Nº DE LEITOS DE ENFERMARIA PRIVADO":
-                organizados = Organizador.agrupar(listaDados, mesAtual, inicio, fim);
-                for (int i = 0; i < fim - inicio; i++){
-                    for (Dados d : organizados) {
-                        soma += d.leitosEnfermariaPrivado;
-                    }
-                    set1.getData().add(new XYChart.Data(Organizador.nomeMes(mesAtual), soma));
-                    if (mesAtual == 12){
-                        mesAtual = 1;
-                    }
-                    else {
-                        mesAtual++;
-                    }
-                    fxHistogram.getData().add(set1);
-                    set1.getData().clear();
-                }
-                soma = 0;
+                // organizados = Organizador.agrupar(listaDados, inicio, fim);
+                // for (int i = 0; i < fim - inicio; i++){
+                //     for (Dados d : organizados) {
+                //         soma += d.leitosEnfermariaPrivado;
+                //     }
+                //     set1.getData().add(new XYChart.Data(Organizador.nomeMes(mesAtual), soma));
+                //     if (mesAtual == 12){
+                //         mesAtual = 1;
+                //     }
+                //     else {
+                //         mesAtual++;
+                //     }
+                //     fxHistogram.getData().add(set1);
+                //     set1.getData().clear();
+                // }
+                // soma = 0;
                 break;
             case "INTERNADOS PÚBLICO E PRIVADO":
-                organizados = Organizador.agrupar(listaDados, mesAtual, inicio, fim);
-                for (int i = 0; i < fim - inicio; i++){
-                    for (Dados d : organizados) {
-                        soma += d.internadosPublicoPrivado;
-                    }
-                    set1.getData().add(new XYChart.Data(Organizador.nomeMes(mesAtual), soma));
-                    if (mesAtual == 12){
-                        mesAtual = 1;
-                    }
-                    else {
-                        mesAtual++;
-                    }
-                    fxHistogram.getData().add(set1);
-                    set1.getData().clear();
-                }
-                soma = 0;
-                break;
+                // organizados = Organizador.agrupar(listaDados, inicio, fim);
+                // for (int i = 0; i < fim - inicio; i++){
+                //     for (Dados d : organizados) {
+                //         soma += d.internadosPublicoPrivado;
+                //     }
+                //     set1.getData().add(new XYChart.Data(Organizador.nomeMes(mesAtual), soma));
+                //     if (mesAtual == 12){
+                //         mesAtual = 1;
+                //     }
+                //     else {
+                //         mesAtual++;
+                //     }
+                //     fxHistogram.getData().add(set1);
+                //     set1.getData().clear();
+                // }
+                // soma = 0;
+                // break;
             case "UTI SUS OCUPAÇÃO":
-                organizados = Organizador.agrupar(listaDados, mesAtual, inicio, fim);
-                for (int i = 0; i < fim - inicio; i++){
-                    for (Dados d : organizados) {
-                        soma += d.ocupacaoUTIPublico;
-                    }
-                    set1.getData().add(new XYChart.Data(Organizador.nomeMes(mesAtual), soma));
-                    if (mesAtual == 12){
-                        mesAtual = 1;
-                    }
-                    else {
-                        mesAtual++;
-                    }
-                    fxHistogram.getData().add(set1);
-                    set1.getData().clear();
-                }
-                soma = 0;
+                // organizados = Organizador.agrupar(listaDados, inicio, fim);
+                // for (int i = 0; i < fim - inicio; i++){
+                //     for (Dados d : organizados) {
+                //         soma += d.ocupacaoUTIPublico;
+                //     }
+                //     set1.getData().add(new XYChart.Data(Organizador.nomeMes(mesAtual), soma));
+                //     if (mesAtual == 12){
+                //         mesAtual = 1;
+                //     }
+                //     else {
+                //         mesAtual++;
+                //     }
+                //     fxHistogram.getData().add(set1);
+                //     set1.getData().clear();
+                // }
+                // soma = 0;
                 break;
             case "ENFERMARIA SUS OCUPAÇÃO":
-                organizados = Organizador.agrupar(listaDados, mesAtual, inicio, fim);
-                for (int i = 0; i < fim - inicio; i++){
-                    for (Dados d : organizados) {
-                        soma += d.ocupacaoEnfermariaPublico;
-                    }
-                    set1.getData().add(new XYChart.Data(Organizador.nomeMes(mesAtual), soma));
-                    if (mesAtual == 12){
-                        mesAtual = 1;
-                    }
-                    else {
-                        mesAtual++;
-                    }
-                    fxHistogram.getData().add(set1);
-                    set1.getData().clear();
-                }
-                soma = 0;
+                // organizados = Organizador.agrupar(listaDados, inicio, fim);
+                // for (int i = 0; i < fim - inicio; i++){
+                //     for (Dados d : organizados) {
+                //         soma += d.ocupacaoEnfermariaPublico;
+                //     }
+                //     set1.getData().add(new XYChart.Data(Organizador.nomeMes(mesAtual), soma));
+                //     if (mesAtual == 12){
+                //         mesAtual = 1;
+                //     }
+                //     else {
+                //         mesAtual++;
+                //     }
+                //     fxHistogram.getData().add(set1);
+                //     set1.getData().clear();
+                // }
+                // soma = 0;
                 break;
             case "UTI PRIVADO OCUPAÇÃO":
-                organizados = Organizador.agrupar(listaDados, mesAtual, inicio, fim);
-                for (int i = 0; i < fim - inicio; i++){
-                    for (Dados d : organizados) {
-                        soma += d.ocupacaoUTIPrivado;
-                    }
-                    set1.getData().add(new XYChart.Data(Organizador.nomeMes(mesAtual), soma));
-                    if (mesAtual == 12){
-                        mesAtual = 1;
-                    }
-                    else {
-                        mesAtual++;
-                    }
-                    fxHistogram.getData().add(set1);
-                    set1.getData().clear();
-                }
-                soma = 0;
+                // organizados = Organizador.agrupar(listaDados, inicio, fim);
+                // for (int i = 0; i < fim - inicio; i++){
+                //     for (Dados d : organizados) {
+                //         soma += d.ocupacaoUTIPrivado;
+                //     }
+                //     set1.getData().add(new XYChart.Data(Organizador.nomeMes(mesAtual), soma));
+                //     if (mesAtual == 12){
+                //         mesAtual = 1;
+                //     }
+                //     else {
+                //         mesAtual++;
+                //     }
+                //     fxHistogram.getData().add(set1);
+                //     set1.getData().clear();
+                // }
+                // soma = 0;
                 break;
             case "ENFERMARIA PRIVADO OCUPAÇÃO":
-                organizados = Organizador.agrupar(listaDados, mesAtual, inicio, fim);
-                for (int i = 0; i < fim - inicio; i++){
-                    for (Dados d : organizados) {
-                        soma += d.ocupacaoEnfermariaPrivado;
-                    }
-                    set1.getData().add(new XYChart.Data(Organizador.nomeMes(mesAtual), soma));
-                    if (mesAtual == 12){
-                        mesAtual = 1;
-                    }
-                    else {
-                        mesAtual++;
-                    }
-                    fxHistogram.getData().add(set1);
-                    set1.getData().clear();
-                }
-                soma = 0;
+                // organizados = Organizador.agrupar(listaDados, inicio, fim);
+                // for (int i = 0; i < fim - inicio; i++){
+                //     for (Dados d : organizados) {
+                //         soma += d.ocupacaoEnfermariaPrivado;
+                //     }
+                //     set1.getData().add(new XYChart.Data(Organizador.nomeMes(mesAtual), soma));
+                //     if (mesAtual == 12){
+                //         mesAtual = 1;
+                //     }
+                //     else {
+                //         mesAtual++;
+                //     }
+                //     fxHistogram.getData().add(set1);
+                //     set1.getData().clear();
+                // }
+                // soma = 0;
                 break;
         
             default:
