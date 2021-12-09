@@ -2,11 +2,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.text.ParseException;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Scanner;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -14,9 +16,11 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
+import java.util.ArrayList;
 
 public class LayoutController {
     
+    ArrayList<Dados> listaDados = new ArrayList<Dados>();
     Integer contador = 0;
     FileChooser fileChooser = new FileChooser();
     Scanner leitor;
@@ -34,6 +38,12 @@ public class LayoutController {
 
     @FXML
     private BarChart<Calendar, Integer> fxHistogram;
+
+    @FXML
+    private CategoryAxis fxMesesBarras;
+
+    @FXML
+    private NumberAxis fxNumberBarras;
 
     @FXML
     private ListView<String> fxListView;
@@ -92,11 +102,13 @@ public class LayoutController {
                     Dados dados = new Dados(data, testesRealizados, testesNegativados, testesConfirmados, casosDia, masculino, feminino, obitos, 
                     isolamentoDomiciliar, altaisolamentoDomiciliar, leitosUPP, leitosUPub, leitosUPriv, leitosEnfPP, leitosEnfPub, leitosEnfPriv, 
                     internadosPP, ocupacaoUPub, ocupacaoEnfPub, ocupacaoUPriv, ocupacaoEnfPriv);
+                    listaDados.add(dados);
                 }
             }
             contador++;
         }
         contador = 0;
+        Collections.sort(listaDados);
     }
 
     @FXML
@@ -108,6 +120,7 @@ public class LayoutController {
     @FXML
     void atualizarTabela(MouseEvent event) {
         this.fxHistogram.setTitle(this.fxListView.getSelectionModel().getSelectedItem());
+        
     }
 
 }

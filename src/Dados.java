@@ -1,11 +1,12 @@
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class Dados implements Comparable {
     private DateFormat dtFormat = new SimpleDateFormat("dd/MM/yyyy");
-    private Calendar data;
+    static public Calendar data;
     private Integer testesRealizados;
     private Integer testesNegativados;
     private Integer testesConfirmados;
@@ -88,4 +89,5 @@ public class Dados implements Comparable {
         }
         return false;
     }
+
 }

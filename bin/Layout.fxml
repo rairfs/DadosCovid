@@ -41,10 +41,10 @@
       </HBox>
       <BarChart fx:id="fxHistogram" layoutX="149.0" layoutY="72.0" prefHeight="328.0" prefWidth="451.0" title="Selecione um dado" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
         <xAxis>
-          <CategoryAxis side="BOTTOM" />
+          <CategoryAxis fx:id="fxMesesBarras" label="Meses" side="BOTTOM" />
         </xAxis>
         <yAxis>
-          <NumberAxis side="LEFT" />
+          <NumberAxis fx:id="fxNumberBarras" label="Quantidade" side="LEFT" />
         </yAxis>
       </BarChart>
       <Label fx:id="fxWarning" layoutX="486.0" layoutY="57.0" text="Selecione uma data válida" textFill="#ee0404" visible="false" AnchorPane.leftAnchor="486.0" AnchorPane.rightAnchor="176.0" />
