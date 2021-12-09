@@ -2,10 +2,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 public class Organizador {
 
-    public static ArrayList<Dados> agrupar(ArrayList<Dados> itens, Calendar mes, Calendar inicio, Calendar fim){
+    public static ArrayList<Dados> agrupar(ArrayList<Dados> itens, Integer mes, Integer inicio, Integer fim){
         ArrayList<Dados> organizados = new ArrayList<Dados>();
         for (Dados i : itens) {
-            if (Dados.data.after(inicio) && Dados.data.before(fim) && Dados.data.MONTH == mes.MONTH){
+            if (i.data.MONTH > inicio && i.data.MONTH < fim && i.data.MONTH == mes){
                 organizados.add(i);
             }
         }

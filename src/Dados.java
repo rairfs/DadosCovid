@@ -1,37 +1,36 @@
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+
 import java.util.Calendar;
 
-public class Dados implements Comparable {
+public class Dados{
     private DateFormat dtFormat = new SimpleDateFormat("dd/MM/yyyy");
-    static public Calendar data;
-    private Integer testesRealizados;
-    private Integer testesNegativados;
-    private Integer testesConfirmados;
-    private Integer casosDia;
-    private Integer masculino;
-    private Integer feminino;
-    private Integer obitos;
-    private Integer isolamentoDomiciliar;
-    private Integer altaIsolamentoDomiciliar;
-    private Integer leitosUTIPublicoPrivado;
-    private Integer leitosUTIPublico;
-    private Integer leitosUTIPrivado;
-    private Integer leitosEnfermariaPublicoPrivado;
-    private Integer leitosEnfermariaPublico;
-    private Integer leitosEnfermariaPrivado;
-    private Integer internadosPublicoPrivado;
-    private Integer ocupacaoUTIPublico;
-    private Integer ocupacaoEnfermariaPublico;
-    private Integer ocupacaoUTIPrivado;
-    private Integer ocupacaoEnfermariaPrivado;
+    public Calendar data = Calendar.getInstance();
+    public Integer testesRealizados;
+    public Integer testesNegativados;
+    public Integer testesConfirmados;
+    public Integer casosDia;
+    public Integer masculino;
+    public Integer feminino;
+    public Integer obitos;
+    public Integer isolamentoDomiciliar;
+    public Integer altaIsolamentoDomiciliar;
+    public Integer leitosUTIPublicoPrivado;
+    public Integer leitosUTIPublico;
+    public Integer leitosUTIPrivado;
+    public Integer leitosEnfermariaPublicoPrivado;
+    public Integer leitosEnfermariaPublico;
+    public Integer leitosEnfermariaPrivado;
+    public Integer internadosPublicoPrivado;
+    public Integer ocupacaoUTIPublico;
+    public Integer ocupacaoEnfermariaPublico;
+    public Integer ocupacaoUTIPrivado;
+    public Integer ocupacaoEnfermariaPrivado;
 
     public Dados(String dt, Integer testR, Integer testN, Integer testC, Integer casosD, Integer masc, Integer fem, Integer obit,
     Integer isolD, Integer altaIsolD, Integer leitosUPP, Integer leitosUPub, Integer leitosUPriv, Integer leitosEnfPP, Integer leitosEnfPub,
     Integer leitosEnfPriv, Integer interPP, Integer ocupUPub, Integer ocupEnfPub, Integer ocupUPriv, Integer ocupEnfPriv) throws ParseException{
-        data = Calendar.getInstance();
         data.setTime(dtFormat.parse(dt));
         testesRealizados = testR;
         testesNegativados = testN;
@@ -57,37 +56,6 @@ public class Dados implements Comparable {
 
     public Dados(){
 
-    }
-
-    @Override
-    public int compareTo(Object o) {
-        try{
-            Dados outro = (Dados) o;
-        }
-        catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        if (data.after(o)){
-            return 1;
-        }
-        else if (data.before(o)){
-            return -1;
-        }
-        else {
-            return 0;
-        }
-
-    }
-
-    public boolean equals(Object obj){
-        if (!(obj instanceof Dados)){
-            return false;
-        }
-        Dados outro = (Dados) obj;
-        if (data.MONTH == outro.data.MONTH){
-            return true;
-        }
-        return false;
     }
 
 }
