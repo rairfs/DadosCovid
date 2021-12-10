@@ -1,29 +1,30 @@
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
 public class Dados{
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private LocalDate data;
-    private Integer testesRealizados;
-    private Integer testesNegativados;
-    private Integer testesConfirmados;
-    private Integer casosDia;
-    private Integer masculino;
-    private Integer feminino;
-    private Integer obitos;
-    private Integer isolamentoDomiciliar;
-    private Integer altaIsolamentoDomiciliar;
-    private Integer leitosUTIPublicoPrivado;
-    private Integer leitosUTIPublico;
-    private Integer leitosUTIPrivado;
-    private Integer leitosEnfermariaPublicoPrivado;
-    private Integer leitosEnfermariaPublico;
-    private Integer leitosEnfermariaPrivado;
-    private Integer internadosPublicoPrivado;
-    private Integer ocupacaoUTIPublico;
-    private Integer ocupacaoEnfermariaPublico;
-    private Integer ocupacaoUTIPrivado;
-    private Integer ocupacaoEnfermariaPrivado;
+    private int testesRealizados;
+    private int testesNegativados;
+    private int testesConfirmados;
+    private int casosDia;
+    private int masculino;
+    private int feminino;
+    private int obitos;
+    private int isolamentoDomiciliar;
+    private int altaIsolamentoDomiciliar;
+    private int leitosUTIPublicoPrivado;
+    private int leitosUTIPublico;
+    private int leitosUTIPrivado;
+    private int leitosEnfermariaPublicoPrivado;
+    private int leitosEnfermariaPublico;
+    private int leitosEnfermariaPrivado;
+    private int internadosPublicoPrivado;
+    private int ocupacaoUTIPublico;
+    private int ocupacaoEnfermariaPublico;
+    private int ocupacaoUTIPrivado;
+    private int ocupacaoEnfermariaPrivado;
 
     public Dados(String dt, Integer testR, Integer testN, Integer testC, Integer casosD, Integer masc, Integer fem, Integer obit,
     Integer isolD, Integer altaIsolD, Integer leitosUPP, Integer leitosUPub, Integer leitosUPriv, Integer leitosEnfPP, Integer leitosEnfPub,
@@ -59,88 +60,92 @@ public class Dados{
         return data;
     }
 
-    public Integer getTestesRealizados(){
+    public int getTestesRealizados(){
         return testesRealizados;
     }
 
-    public Integer getTestesNegativados(){
+    public int getTestesNegativados(){
         return testesNegativados;
     }
 
-    public Integer getTestesConfirmados(){
+    public int getTestesConfirmados(){
         return testesConfirmados;
     }
 
-    public Integer getCasosDia(){
+    public int getCasosDia(){
         return casosDia;
     }
 
-    public Integer getMasculino(){
+    public int getMasculino(){
         return masculino;
     }
 
-    public Integer getFeminino(){
+    public int getFeminino(){
         return feminino;
     }
 
-    public Integer getObitos(){
+    public int getObitos(){
         return obitos;
     }
 
-    public Integer getIsolamentoDomiciliar(){
+    public int getIsolamentoDomiciliar(){
         return isolamentoDomiciliar;
     }
 
-    public Integer getAltaIsolamentoDomiciliar(){
+    public int getAltaIsolamentoDomiciliar(){
         return altaIsolamentoDomiciliar;
     }
 
-    public Integer getLeitosUTIPublicoPrivado(){
+    public int getLeitosUTIPublicoPrivado(){
         return leitosUTIPublicoPrivado;
     }
 
-    public Integer getLeitosUTIPublico(){
+    public int getLeitosUTIPublico(){
         return leitosUTIPublico;
     }
 
-    public Integer getLeitosUTIPrivado(){
+    public int getLeitosUTIPrivado(){
         return leitosUTIPrivado;
     }
 
-    public Integer getLeitosEnfermariaPublicoPrivado(){
+    public int getLeitosEnfermariaPublicoPrivado(){
         return leitosEnfermariaPublicoPrivado;
     }
 
-    public Integer getLeitosEnfermariaPublico(){
+    public int getLeitosEnfermariaPublico(){
         return leitosEnfermariaPublico;
     }
 
-    public Integer getLeitosEnfermariaPrivado(){
+    public int getLeitosEnfermariaPrivado(){
         return leitosEnfermariaPrivado;
     }
 
-    public Integer getInternadosPublicoPrivado(){
+    public int getInternadosPublicoPrivado(){
         return internadosPublicoPrivado;
     }
 
-    public Integer getOcupacaoUTIPublico(){
+    public int getOcupacaoUTIPublico(){
         return ocupacaoUTIPublico;
     }
 
-    public Integer getOcupacaoEnfermariaPublico(){
+    public int getOcupacaoEnfermariaPublico(){
         return ocupacaoEnfermariaPublico;
     }
 
-    public Integer getOcupacaoUTIPrivado(){
+    public int getOcupacaoUTIPrivado(){
         return ocupacaoUTIPrivado;
     }
 
-    public Integer getOcupacaoEnfermariaPrivado(){
+    public int getOcupacaoEnfermariaPrivado(){
         return ocupacaoEnfermariaPrivado;
     }
 
-    public Integer getMesInt(){
+    public int getMesInt(){
         return data.getMonthValue();
+    }
+
+    public int getYear(){
+        return data.getYear();
     }
 
 }

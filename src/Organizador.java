@@ -1,11 +1,9 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 public class Organizador {
 
     public static ArrayList<Dados> agrupar(ArrayList<Dados> itens, LocalDate inicio, LocalDate fim){
-        ArrayList<Dados> organizados = new ArrayList<Dados>();
-        // if Não funcionando, verificar!
+        ArrayList<Dados> organizados = new ArrayList<>();
 
         for (Dados i : itens) {
             if (i.getData().isAfter(inicio) && i.getData().isBefore(fim)){
@@ -20,7 +18,7 @@ public class Organizador {
             case 1:
                 return "janeiro";
             case 2:
-                return "feveiro";
+                return "fevereiro";
             case 3:
                 return "março";
             case 4:
