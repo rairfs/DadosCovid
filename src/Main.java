@@ -7,6 +7,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.WritableImage;
 import javafx.stage.Stage;
 
 /**
@@ -26,6 +27,8 @@ public class Main extends Application {
         stage.setMinHeight(700);
         stage.setTitle("Dados Covid-19");
         stage.show();
+        
+
     }
 
     /**

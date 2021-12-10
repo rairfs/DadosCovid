@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17" fx:controller="FXMLDocumentController">
+<AnchorPane id="AnchorPane" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLDocumentController">
    <children>
       <MenuBar fx:id="barraMenu" layoutY="1.0" prefHeight="25.0" prefWidth="800.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <menus>
@@ -44,14 +44,14 @@
                   <HBox alignment="CENTER" prefHeight="45.0" prefWidth="530.0" spacing="10.0">
                      <children>
                         <ComboBox fx:id="tipoFiltro" onAction="#selecionaFiltro" prefWidth="150.0" promptText="Selecione um filtro" />
-                        <DatePicker fx:id="dataInicial" promptText="Data inicial" visible="false" />
-                        <DatePicker fx:id="dataFinal" promptText="Data final" visible="false" />
+                        <DatePicker fx:id="dataInicial" onAction="#escolheData" promptText="Data inicial" visible="false" />
+                        <DatePicker fx:id="dataFinal" onAction="#escolheData" promptText="Data final" visible="false" />
                      </children>
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
                   </HBox>
-                  <Label fx:id="aviso" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="549.0" text="Seleção inválida" textFill="#f80202" visible="false" />
+                  <Label fx:id="aviso" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="549.0" text="Seleção inválida" textFill="#f80202" />
                   <BarChart fx:id="tabela" prefHeight="493.0" prefWidth="550.0" title="Selecione um tipo de dado" VBox.vgrow="ALWAYS">
                     <xAxis>
                       <CategoryAxis label="Meses" prefHeight="49.0" prefWidth="479.0" />
